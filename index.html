@@ -1,4 +1,6 @@
-<html lang="fr"><head>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Hubcode Ultra - Repository Manager</title>
@@ -17,6 +19,7 @@
             --orange: #ffa726;
             --up-color: #00cc88;
             --view-color: #4d9eff;
+            --green: #4ade80;
         }
         
         body {
@@ -164,7 +167,6 @@
             color: #fff;
         }
         
-        /* Ligne des fichiers : largeurs flexibles pour équilibre */
         .repo-files-row {
             display: flex;
             flex-wrap: wrap;
@@ -174,8 +176,8 @@
         }
         
         .file-btn {
-            flex: 1 0 80px;       /* base 80px, peut grandir */
-            max-width: 140px;     /* éviter trop grand */
+            flex: 1 0 80px;
+            max-width: 140px;
             padding: 10px 4px;
             border: 1px solid rgba(0, 0, 0, 0.2);
             border-radius: 8px;
@@ -198,83 +200,99 @@
             transform: translateY(1px);
         }
         
-        /* Couleurs par extension (plus douces) */
-        .file-html { color: var(--blue); border-bottom: 2px solid rgba(88, 166, 255, 0.25); }
-        .file-css  { color: #ff6b6b; border-bottom: 2px solid rgba(255, 107, 107, 0.25); }
-        .file-js   { color: #ffd93d; border-bottom: 2px solid rgba(255, 217, 61, 0.25); }
-        .file-json { color: var(--accent); border-bottom: 2px solid rgba(255, 202, 40, 0.25); }
-        .file-txt  { color: #b0b0c0; border-bottom: 2px solid rgba(200, 200, 200, 0.15); }
-        .file-md   { color: #6c8cff; border-bottom: 2px solid rgba(108, 140, 255, 0.25); }
-        .file-xml  { color: #ff8a65; border-bottom: 2px solid rgba(255, 138, 101, 0.25); }
-        .file-yml  { color: #a29bfe; border-bottom: 2px solid rgba(162, 155, 254, 0.25); }
-        .file-toml { color: #81ecec; border-bottom: 2px solid rgba(129, 236, 236, 0.25); }
-        .file-sh   { color: #55efc4; border-bottom: 2px solid rgba(85, 239, 196, 0.25); }
-        .file-py   { color: #74b9ff; border-bottom: 2px solid rgba(116, 185, 255, 0.25); }
-        .file-rb   { color: #ff7675; border-bottom: 2px solid rgba(255, 118, 117, 0.25); }
-        .file-php  { color: #a29bfe; border-bottom: 2px solid rgba(162, 155, 254, 0.25); }
-        .file-other { color: #b0b0c0; border-bottom: 2px solid rgba(200, 200, 200, 0.15); }
+        .file-manifest { color: var(--danger); border-bottom: 2px solid rgba(248, 81, 73, 0.5); }
+        .file-sw       { color: #ffd93d; border-bottom: 2px solid rgba(255, 217, 61, 0.5); }
+        .file-html     { color: var(--green); border-bottom: 2px solid rgba(74, 222, 128, 0.5); }
+        .file-css      { color: var(--danger); border-bottom: 2px solid rgba(248, 81, 73, 0.3); }
+        .file-js       { color: #ffd93d; border-bottom: 2px solid rgba(255, 217, 61, 0.5); }
+        .file-json     { color: var(--accent); border-bottom: 2px solid rgba(255, 202, 40, 0.3); }
+        .file-txt      { color: #b0b0c0; border-bottom: 2px solid rgba(200, 200, 200, 0.15); }
+        .file-md       { color: #6c8cff; border-bottom: 2px solid rgba(108, 140, 255, 0.3); }
+        .file-xml      { color: #ff8a65; border-bottom: 2px solid rgba(255, 138, 101, 0.3); }
+        .file-yml      { color: #a29bfe; border-bottom: 2px solid rgba(162, 155, 254, 0.3); }
+        .file-toml     { color: #81ecec; border-bottom: 2px solid rgba(129, 236, 236, 0.3); }
+        .file-sh       { color: #55efc4; border-bottom: 2px solid rgba(85, 239, 196, 0.3); }
+        .file-py       { color: #74b9ff; border-bottom: 2px solid rgba(116, 185, 255, 0.3); }
+        .file-rb       { color: #ff7675; border-bottom: 2px solid rgba(255, 118, 117, 0.3); }
+        .file-php      { color: #a29bfe; border-bottom: 2px solid rgba(162, 155, 254, 0.3); }
+        .file-other    { color: #b0b0c0; border-bottom: 2px solid rgba(200, 200, 200, 0.15); }
 
-        /* Ligne des actions fixes : boutons plus sobres mais distincts */
+        /* Ligne des actions fixes : désormais sur une seule ligne */
         .repo-actions-fixed {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             gap: 4px;
             width: 100%;
             padding-top: 8px;
             border-top: 1px solid rgba(255,255,255,0.06);
+            overflow-x: auto;
         }
         
         .action-btn {
-            flex: 1;
-            min-width: 48px;
-            padding: 10px 4px;
-            border: 1px solid rgba(255,255,255,0.08);
+            flex: 1 1 0;
+            min-width: 40px;
+            max-width: 90px;
+            padding: 8px 2px;
+            border: 1px solid rgba(255,255,255,0.15);
             border-radius: 8px;
-            background: rgba(38, 38, 43, 0.5);
+            background: rgba(50, 50, 58, 0.7);
             backdrop-filter: blur(4px);
-            color: #c0c0d0;
-            font-size: 10px;
-            font-weight: 600;
+            color: #f0f0f5;
+            font-size: 8px;
+            font-weight: 700;
             text-transform: uppercase;
             cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
             text-align: center;
             transition: all 0.1s ease;
             letter-spacing: 0.3px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+            white-space: nowrap;
         }
         .action-btn:active {
-            box-shadow: inset 0 2px 6px rgba(0,0,0,0.3);
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
             transform: translateY(1px);
         }
 
-        /* Styles spécifiques très discrets */
         .action-inject {
             color: #ffdd99;
-            border-color: rgba(255, 202, 40, 0.2);
+            border-color: rgba(255, 202, 40, 0.4);
+            background: rgba(60, 50, 30, 0.6);
         }
         .action-up {
-            color: #a0e0c0;
-            border-color: rgba(0, 204, 136, 0.25);
-            box-shadow: 0 0 12px rgba(0, 204, 136, 0.08);
+            color: #b0f0d0;
+            border-color: rgba(0, 204, 136, 0.5);
+            background: rgba(20, 60, 50, 0.5);
+            box-shadow: 0 0 16px rgba(0, 204, 136, 0.15);
         }
         .action-up-active {
             background: #00cc88 !important;
             color: #111 !important;
             border-color: transparent !important;
-            box-shadow: 0 0 24px rgba(0, 204, 136, 0.4) !important;
+            box-shadow: 0 0 30px rgba(0, 204, 136, 0.5) !important;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.3);
         }
         .action-view {
-            color: #8ab8ff;
-            border-color: rgba(77, 158, 255, 0.2);
-            box-shadow: 0 0 12px rgba(77, 158, 255, 0.08);
+            color: #b0d0ff;
+            border-color: rgba(77, 158, 255, 0.4);
+            background: rgba(30, 50, 80, 0.5);
+            box-shadow: 0 0 16px rgba(77, 158, 255, 0.12);
         }
         .action-back {
-            color: var(--orange);
-            border-color: rgba(255, 167, 38, 0.2);
+            color: #ffc08a;
+            border-color: rgba(255, 167, 38, 0.4);
+            background: rgba(60, 45, 25, 0.5);
         }
         .action-sup {
-            color: var(--danger);
-            border-color: rgba(248, 81, 73, 0.2);
+            color: #ff8a8a;
+            border-color: rgba(248, 81, 73, 0.4);
+            background: rgba(60, 25, 25, 0.5);
+        }
+        .action-icon {
+            color: #c9b0ff;
+            border-color: rgba(170, 130, 255, 0.4);
+            background: rgba(50, 30, 60, 0.5);
+            box-shadow: 0 0 16px rgba(170, 130, 255, 0.08);
         }
 
         .btn-flash-red {
@@ -412,14 +430,11 @@
             font-size: 10px;
             padding: 4px 8px;
         }
-    </style>
 
-<link rel="manifest" href="./manifest.json">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#4b6cb7">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="apple-touch-icon" href="icon.png">
+        .hidden-input {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 
@@ -450,7 +465,7 @@
 <script>
     let allRepositories = [];
     let audioCtx = null;
-    let upModeState = {}; // { repoName: bool }
+    let upModeState = {};
 
     // ---------- CONVERSIONS UTF-8 / BASE64 FIABLES ----------
     function b64ToUtf8(b64) {
@@ -526,8 +541,14 @@
         }
     }
 
-    // ---------- DÉTECTION DES EXTENSIONS POUR CLASSES CSS ----------
+    // ---------- DÉTECTION DES EXTENSIONS ET CLASSES SPÉCIFIQUES ----------
     function getFileButtonClass(filename) {
+        const name = filename.toLowerCase();
+        if (name === 'manifest.json') return 'file-manifest';
+        if (name === 'sw.js') return 'file-sw';
+        if (name === 'index.html') return 'file-html';
+        if (name === 'style.css') return 'file-css';
+        
         const ext = filename.split('.').pop().toLowerCase();
         const map = {
             'html': 'file-html',
@@ -578,6 +599,12 @@
                         const files = items
                             .filter(item => item.type === 'file' && isTextFile(item.name))
                             .map(item => item.name);
+                        files.sort((a, b) => {
+                            const order = { 'manifest.json': 0, 'sw.js': 1 };
+                            const aOrder = order[a] ?? 2;
+                            const bOrder = order[b] ?? 2;
+                            return aOrder - bOrder;
+                        });
                         repo.files = files;
                     } else {
                         repo.files = [];
@@ -637,7 +664,7 @@
     }
     function disableBackBtn(repoName, disabled) { const btn = document.querySelector(`#repo-${repoName} .action-back`); if(btn) btn.disabled = disabled; }
 
-    // ---------- MODE UP : toggle & désactivation ----------
+    // ---------- MODE UP ----------
     function toggleUpMode(buttonEl, repoName) {
         const isActive = upModeState[repoName] || false;
         if (isActive) {
@@ -661,7 +688,7 @@
         }
     }
 
-    // ---------- HANDLE FILE ACTION (selon mode UP) ----------
+    // ---------- HANDLE FILE ACTION ----------
     async function handleFileAction(owner, repo, filename, branch, buttonElement) {
         if (upModeState[repo]) {
             await pasteToGitFile(owner, repo, filename, branch, buttonElement);
@@ -670,7 +697,7 @@
         }
     }
 
-    // ---------- PASTE (UP) depuis presse-papiers vers GitHub ----------
+    // ---------- PASTE (UP) ----------
     async function pasteToGitFile(owner, repo, filename, branch, buttonElement) {
         const token = localStorage.getItem('hubcode_token');
         if (!token) {
@@ -739,7 +766,85 @@
         }
     }
 
-    // ---------- INJECTION PWA DANS index.html ----------
+    // ---------- UPLOAD ICON ----------
+    function uploadIcon(owner, repo, branch) {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.className = 'hidden-input';
+        input.onchange = async function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            if (!file.type.startsWith('image/')) {
+                showNotification("Veuillez sélectionner une image", "danger");
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = async function(ev) {
+                const base64Data = ev.target.result.split(',')[1];
+                await pushIconToRepo(owner, repo, branch, base64Data);
+            };
+            reader.readAsDataURL(file);
+        };
+        document.body.appendChild(input);
+        input.click();
+        input.remove();
+    }
+
+    async function pushIconToRepo(owner, repo, branch, base64Data) {
+        const token = localStorage.getItem('hubcode_token');
+        if (!token) {
+            showNotification("Token manquant", "danger");
+            return;
+        }
+        const logRepo = repo;
+        showTracker(logRepo);
+        setActivityState(true, `ICON ${repo}`);
+        addLog(logRepo, `Upload de l'icône vers ${owner}/${repo}...`, 'step');
+
+        try {
+            addLog(logRepo, "Vérification de l'existant...", 'loading');
+            let currentSha = null;
+            const getUrl = `https://api.github.com/repos/${owner}/${repo}/contents/icon.png?ref=${branch}`;
+            const getResp = await fetch(getUrl, { headers: { 'Authorization': `token ${token}` } });
+            if (getResp.status === 200) {
+                const data = await getResp.json();
+                currentSha = data.sha;
+                addLog(logRepo, "SHA existant récupéré", 'success');
+            } else if (getResp.status === 404) {
+                addLog(logRepo, "Aucun icon.png existant, création", 'warning');
+            } else {
+                throw new Error(`Erreur GET (${getResp.status})`);
+            }
+
+            const putBody = {
+                message: `Hubcode: upload icon.png via ICON action`,
+                content: base64Data,
+                branch: branch
+            };
+            if (currentSha) putBody.sha = currentSha;
+
+            addLog(logRepo, "Envoi de l'image...", 'loading');
+            const putResp = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/icon.png`, {
+                method: 'PUT',
+                headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify(putBody)
+            });
+            if (!putResp.ok) {
+                const errData = await putResp.json();
+                throw new Error(errData.message || `Échec PUT (${putResp.status})`);
+            }
+            addLog(logRepo, "✅ icon.png mis à jour avec succès !", 'success');
+            showNotification(`Icone uploadée pour ${repo}`, 'success');
+        } catch (err) {
+            addLog(logRepo, `ERREUR : ${err.message}`, 'error');
+            showNotification(`Échec upload : ${err.message}`, 'danger');
+        } finally {
+            setActivityState(false);
+        }
+    }
+
+    // ---------- INJECTION PWA ----------
     async function injectPwaToRepo(owner, repo, branch) {
         const token = localStorage.getItem('hubcode_token');
         if (!token) { showNotification("Token manquant", "danger"); return; }
@@ -846,7 +951,7 @@
         if (panel) panel.style.display = 'none';
     }
 
-    // ---------- ROLLBACK COMPLET (4 fichiers PWA) ----------
+    // ---------- ROLLBACK COMPLET ----------
     const PWA_FILES = ['index.html', 'manifest.json', 'sw.js', 'icon.png'];
 
     async function getFileAtCommit(owner, repo, file, commitSha, token) {
@@ -1075,7 +1180,7 @@
         window.open(`https://${owner.toLowerCase()}.github.io/${repo}/?t=${Date.now()}`, '_blank');
     }
 
-    // ---------- AFFICHAGE DE LA LISTE (répartition équilibrée) ----------
+    // ---------- AFFICHAGE DE LA LISTE ----------
     function renderRepos(repos) {
         const container = document.getElementById('repoListContainer');
         container.innerHTML = "";
@@ -1090,28 +1195,35 @@
 
             let headerHtml = `<div class="repo-header"><span>${repo.name}</span></div>`;
 
-            // Ligne des fichiers (dynamiques) : classe .repo-files-row
             let filesRowHtml = `<div class="repo-files-row">`;
             if (repo.files && repo.files.length > 0) {
                 repo.files.forEach(filename => {
                     const btnClass = getFileButtonClass(filename);
-                    filesRowHtml += `<button class="file-btn ${btnClass}" onclick="playHum60Hz(); handleFileAction('${repo.owner.login}', '${repo.name}', '${filename}', '${repo.default_branch}', this)">${filename}</button>`;
+                    let displayName = filename;
+                    let extraStyle = '';
+                    if (filename === 'manifest.json') {
+                        displayName = 'MF';
+                        extraStyle = ' style="flex: 0 0 40px; max-width: 40px; padding: 10px 0;"';
+                    } else if (filename === 'sw.js') {
+                        displayName = 'SW';
+                        extraStyle = ' style="flex: 0 0 40px; max-width: 40px; padding: 10px 0;"';
+                    }
+                    filesRowHtml += `<button class="file-btn ${btnClass}" title="${filename}"${extraStyle} onclick="playHum60Hz(); handleFileAction('${repo.owner.login}', '${repo.name}', '${filename}', '${repo.default_branch}', this)">${displayName}</button>`;
                 });
             } else {
                 filesRowHtml += `<span class="file-loading">(aucun fichier texte à la racine)</span>`;
             }
             filesRowHtml += `</div>`;
 
-            // Ligne des actions fixes : classe .repo-actions-fixed
             let fixedRowHtml = `<div class="repo-actions-fixed">`;
             fixedRowHtml += `<button class="action-btn action-inject" onclick="playHum60Hz(); showInjectConfirmPanel('${repo.name}', '${repo.owner.login}', '${repo.default_branch}')">INJECT</button>`;
             fixedRowHtml += `<button class="action-btn action-up" onclick="playHum60Hz(); toggleUpMode(this, '${repo.name}')">UP</button>`;
+            fixedRowHtml += `<button class="action-btn action-icon" onclick="playHum60Hz(); uploadIcon('${repo.owner.login}', '${repo.name}', '${repo.default_branch}')">ICON</button>`;
             fixedRowHtml += `<button class="action-btn action-view" onclick="playHum60Hz(); viewLivePage('${repo.owner.login}', '${repo.name}')">VIEW</button>`;
             fixedRowHtml += `<button class="action-btn action-back" onclick="playHum60Hz(); showRollbackConfirmPanel('${repo.name}', '${repo.owner.login}', '${repo.default_branch}')">BACK</button>`;
             fixedRowHtml += `<button class="action-btn action-sup" onclick="playHum60Hz(); showConfirmPanel('${repo.name}')">SUP</button>`;
             fixedRowHtml += `</div>`;
 
-            // Panneaux de confirmation (inchangés)
             let confirmHtml = `
                 <div class="confirm-panel" id="confirm-inject-${repo.name}" style="display:none;">
                     <span style="color:var(--accent); font-weight:bold;">🔧 Injecter les balises PWA dans index.html ?</span>
@@ -1142,7 +1254,6 @@
             div.innerHTML = headerHtml + filesRowHtml + fixedRowHtml + confirmHtml;
             container.appendChild(div);
 
-            // Restaurer l'état du mode UP si nécessaire
             if (upModeState[repo.name]) {
                 const upBtn = div.querySelector('.action-up');
                 if (upBtn) upBtn.classList.add('action-up-active');
@@ -1155,15 +1266,5 @@
         window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(e => console.log("SW not available")));
     }
 </script>
-
-
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js')
-        .then(reg => console.log('Service Worker enregistré !'))
-        .catch(err => console.error('Erreur SW :', err));
-    });
-  }
-</script>
-</body></html>
+</body>
+</html>
